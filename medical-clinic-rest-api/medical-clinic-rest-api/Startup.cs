@@ -1,8 +1,10 @@
-using medical_clinic_rest_api.Data;
+
+using medical_clinic_rest_api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,7 +36,7 @@ namespace medical_clinic_rest_api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "medical_clinic_rest_api", Version = "v1" });
             });
 
-            services.Add(new ServiceDescriptor(typeof(ClinicaMedicaDbContext), new ClinicaMedicaDbContext(Configuration.GetConnectionString("DbConnection"))));
+            services.AddDbContext<clinica_medicaContext>(option => option.UseMySQL(Configuration.GetConnectionString("DbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

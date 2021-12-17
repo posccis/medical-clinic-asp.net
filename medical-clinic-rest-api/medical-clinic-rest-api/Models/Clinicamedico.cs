@@ -1,25 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace medical_clinic_rest_api.Models
+#nullable disable
+
+namespace medical_clinic_rest_api
 {
-    public class Clinicamedico
+    [Table("clinicamedico")]
+    [Index(nameof(CodMed), Name = "CodMed")]
+    public partial class Clinicamedico
     {
-        [Required(ErrorMessage = "Every clinic have a code!####CodCli can't be empty!")]
+        public Clinicamedico()
+        {
+            Agendaconsulta = new HashSet<Agendaconsultum>();
+        }
+
+        [Key]
         public int CodCli { get; set; }
-
-        [Required(ErrorMessage = "Every doctor in the clinic have a code!####CodMed can't be empty!")]
+        [Key]
         public int CodMed { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? DataIngresso { get; set; }
+        [Column(TypeName = "float(4,2)")]
+        public float? CargaHorariaSemanal { get; set; }
 
-
-        public string DataIngresso { get; set; }
-
-        public float CargaHorariaSemanal { get; set; }
-
-
-
+        [ForeignKey(nameof(CodCli))]
+        [InverseProperty(nameof(Clinica.Clinicamedicos))]
+        public virtual Clinica CodCliNavigation { get; set; }
+        [ForeignKey(nameof(CodMed))]
+        [InverseProperty(nameof(Medico.Clinicamedicos))]
+        public virtual Medico CodMedNavigation { get; set; }
+        [InverseProperty(nameof(Agendaconsultum.Cod))]
+        public virtual ICollection<Agendaconsultum> Agendaconsulta { get; set; }
     }
 }

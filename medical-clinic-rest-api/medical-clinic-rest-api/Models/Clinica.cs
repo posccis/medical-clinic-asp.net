@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace medical_clinic_rest_api.Models
+#nullable disable
+
+namespace medical_clinic_rest_api
 {
-    public class Clinica
+    [Table("clinica")]
+    public partial class Clinica
     {
-        [Required(ErrorMessage = "All clinics need a code!####CodCli can't be empty!")]
+        public Clinica()
+        {
+            Clinicamedicos = new HashSet<Clinicamedico>();
+        }
+
+        [Key]
         public int CodCli { get; set; }
-
-        [Required(ErrorMessage = "All clinics need a Name!####NomeCli can't be empty!")]
+        [StringLength(15)]
         public string NomeCli { get; set; }
-
-        [Required(ErrorMessage ="All clinics need a address!####Endereco can't be empty!")]
+        [StringLength(40)]
         public string Endereco { get; set; }
-
-
+        [StringLength(11)]
         public string Telefone { get; set; }
-
-        
+        [StringLength(40)]
         public string Email { get; set; }
+
+        [InverseProperty(nameof(Clinicamedico.CodCliNavigation))]
+        public virtual ICollection<Clinicamedico> Clinicamedicos { get; set; }
     }
 }

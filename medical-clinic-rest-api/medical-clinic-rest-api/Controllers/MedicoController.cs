@@ -1,8 +1,7 @@
-﻿using medical_clinic_rest_api.Data;
-using medical_clinic_rest_api.Models;
+﻿using medical_clinic_rest_api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,36 +13,33 @@ namespace medical_clinic_rest_api.Controllers
     [ApiController]
     public class MedicoController : ControllerBase
     {
-        private ClinicaMedicaDbContext _dbContext;
+        private clinica_medicaContext _dbContext;
 
-        public MedicoController(ClinicaMedicaDbContext dbContext)
+        public MedicoController(clinica_medicaContext dbContext)
         {
-
             _dbContext = dbContext;
-            
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyProperty (Doctor doctor)
+        public async Task<IActionResult> GetAllMedicos() 
         {
-
-            var connection = _dbContext.GetConnection();
-            await connection.OpenAsync();
-
-            List<Doctor> lista = new List<Doctor>();
             
+            var medicos = await (
+                from medico in _dbContext.Medicos
+                select new
+                {
+                    CodMed = medico.CodMed,
+                    NomeMed = medico.NomeMed,
+                    Genero = medico.Genero,
+                    Telefone = medico.Telefone,
+                    Email = medico.Email,
+                    CodEspec = medico.CodEspec
+                }
+                ).ToListAsync();
 
-            var query = new MySqlCommand("SELECT * FROM Medico", connection);
-
-            var reader = await query.ExecuteReaderAsync();
-
-            var value = reader.GetValue(0);
-            
-
-            return Ok(value);
-
-
-
+            return Ok(medicos);
         }
+
+
     }
 }
