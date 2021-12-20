@@ -37,6 +37,7 @@ namespace medical_clinic_rest_api
             });
 
             services.AddDbContext<clinica_medicaContext>(option => option.UseMySQL(Configuration.GetConnectionString("DbConnection")));
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

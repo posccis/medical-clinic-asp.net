@@ -48,3 +48,7 @@ C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\m
 C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\MySqlConnector.dll
 C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\obj\Debug\net5.0\medical-clinic-rest-api.csproj.AssemblyReference.cache
+C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\lkzq\Desktop\Principal\medica-clinic-rest-api\medical-clinic-rest-api\medical-clinic-rest-api\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

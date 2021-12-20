@@ -56,18 +56,55 @@ namespace medical_clinic_rest_api.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> MedicoUpdate([FromBody]string column, string valor, int codigo) 
-        //{
+        ///Update one especific column
+        [HttpPut]
+        public async Task<IActionResult> MedicoUpdate(int codigo, string column, string valor)
+        {
 
-        //    _dbContext.Medicos.FromSqlRaw("UPDATE medico set " + column.ToString() + "=" + valor.ToString() + " where CodMed=" + codigo);
-        //    await _dbContext.SaveChangesAsync();
+            var medico_ = await _dbContext.Medicos.Where(a => a.CodMed == codigo).ToListAsync();
 
-        //    return StatusCode(StatusCodes.Status200OK);
+            column = column.ToLower();
+
+            if (column == "nomemed")
+            {
+               medico_[0].NomeMed = valor;
+            }
+            else if (column == "genero")
+            {
+                medico_[0].Genero = valor;
+            }
+            else if (column == "telefone")
+            {
+                medico_[0].Telefone = valor;
+            }
+            else if (column == "email")
+            {
+                medico_[0].Email = valor;
+            }
+            else
+            {
+                return BadRequest("Probabily you're trying to edit a field wich you should'nt. Try other.");
+            }
+
+            _dbContext.Medicos.Update(medico_[0]);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok(medico_);
 
 
-            
-        //}
+
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> MedicoDel(int codigo) 
+        {
+            var medico_ = await _dbContext.Medicos.Where(a => a.CodMed == codigo).ToListAsync();
+
+            _dbContext.Remove(medico_[0]);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok("Item deleted.");
+        }
 
 
 
