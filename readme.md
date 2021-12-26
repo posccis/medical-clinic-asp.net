@@ -28,20 +28,24 @@
 
 - Learn how to manipulate the data from the MySql from the Visual Studio 
 
-### Medico Controller
+### Difficulties
+To start the main difficult that i found in this project was with the MySql connection. In the internet we have so few contents explain how to connecting the Asp.Net with the MySQL and the most part of this content is old or for so very especific situation that is almost impossible to apply in other projects. We also got the problem that most part of the packages useds was not official from the Microsoft and from third party developers. 
+By my fault i lost some time cause i forget the concept of Code-First and Db-First. My Db was developed before the code(as i said, i already used this db in other project) and i forget that we have scaffold methods, but now i know.
+
+### Controllers
 
 <hr>
 
-##### Get - Return all the doctors
+##### Get - Return all
 ```
-/api/Medico
+/api/AgendaConsulta
 ```
 
-##### Post - Create a doctor
+##### Post - Create
 ```
 /api/Medico
 ```
-```Get
+```Post
 {
 	"CodMed": 145,
 	"NomeMed": "Joao",
@@ -49,4 +53,12 @@
 	"Telefone": "81 999172990",
 	"CodEspec": 2
 }
+```
+##### Put - Update
+```
+/api/Paciente?codigo=500&column=NomePac&valor=Rodrigo
+```
+##### Delete - Delete
+```
+/api/Especialidade?codigo=500
 ```
